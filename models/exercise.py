@@ -1,4 +1,4 @@
-from sqlalchemy import String, ForeignKey
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from models.annotated import str_30
@@ -14,8 +14,7 @@ class Exercise(Base):
     name: Mapped[str_30]
     type: Mapped[ExerciseType]
     is_default: Mapped[bool] = mapped_column(default=False)
-
     user_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
-    owner = relationship("User", back_populates="exercises")
 
+    owner: Mapped["User"] = relationship(back_populates="exercises")
     workout_items: Mapped[List["WorkoutExercise"]] = relationship(back_populates="exercise", cascade="all, delete")

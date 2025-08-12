@@ -184,8 +184,7 @@ async def show_exercise_actions(callback: CallbackQuery, state: FSMContext, sess
     if exercise.is_default:
         logger.info(f"Пользователь {callback.from_user.id} выбрал упражнение по умолчанию {exercise.name}.")
         await callback.message.edit_text(
-            f"🏋️ Упражнение: {exercise.name}\n\n"
-            "Упражнение по умолчанию - редактирование недоступно",
+            f"🏋️ Упражнение: {exercise.name}",
             reply_markup=build_exercise_action_keyboard(
                 exercise_id=exercise.id,
                 exercise_type=exercise_type,
@@ -308,7 +307,7 @@ async def confirm_delete(callback: CallbackQuery, state: FSMContext, session):
     )
 
     await callback.message.edit_text(
-        text="📋 Упражнение удалено. Вот обновлённый список:",
+        text="Список упражнений",
         reply_markup=build_exercise_keyboard(
             exercises=exercises,
             page=page,
